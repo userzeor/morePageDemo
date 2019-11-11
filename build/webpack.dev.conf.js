@@ -20,7 +20,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         // historyApiFallback: true,
         historyApiFallback: {
             rewrites: [
-                { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'html/index/index.html') },
+                { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'view/help.html') },
             ],
         },
         hot: true,

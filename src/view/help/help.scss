@@ -1,0 +1,86 @@
+@font-face {
+  font-family: Muiicons;
+  font-style: normal;
+  font-weight: 400;
+  src: url(../../fonts/mui.ttf) format('truetype');
+}
+
+html,
+body,
+.page {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: linear-gradient(
+    to bottom left,
+    rgb(239, 245, 172) 5%,
+    rgb(42, 161, 131)
+  );
+}
+.page {
+  padding: 0 35px;
+}
+.title {
+  padding: 20px 0 10px 0;
+  font-size: 14px;
+  color: #fff;
+}
+.t-box {
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+}
+.t-list {
+  position: relative;
+}
+.t-list.line:after {
+  position: absolute;
+  right: 15px;
+  bottom: 0;
+  left: 15px;
+  height: 1px;
+  content: '';
+  background-color: #ececec;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+.t-item {
+  position: relative;
+  padding: 15px 20px;
+  font-size: 14px;
+  color: #333;
+}
+.t-item:after {
+  position: absolute;
+  content: '\e583';
+  right: 15px;
+  top: 50%;
+  display: inline-block;
+  font-family: Muiicons;
+  font-size: inherit;
+  line-height: 1;
+  color: #bbb;
+  text-decoration: none;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-font-smoothing: antialiased;
+}
+.q-box {
+  display: flex;
+  padding: 20px 10px 5px 10px;
+  background: #ffffff;
+  border-radius: 5px;
+  flex-wrap: wrap;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+}
+.q-item {
+  display: flex;
+  margin-bottom: 15px;
+  width: 33.3%;
+  align-items: center;
+  justify-content: center;
+}
+.q-img {
+  width: 45px;
+  height: 45px;
+}

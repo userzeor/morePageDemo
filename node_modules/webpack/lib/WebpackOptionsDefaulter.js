@@ -33,8 +33,10 @@ class WebpackOptionsDefaulter extends OptionsDefaulter {
 
 		this.set("entry", "./src");
 
-		this.set("devtool", "make", options =>
-			options.mode === "development" ? "eval" : false
+		this.set(
+			"devtool",
+			"make",
+			options => (options.mode === "development" ? "eval" : false)
 		);
 		this.set("cache", "make", options => options.mode === "development");
 
@@ -191,8 +193,10 @@ class WebpackOptionsDefaulter extends OptionsDefaulter {
 		});
 		this.set("performance.maxAssetSize", 250000);
 		this.set("performance.maxEntrypointSize", 250000);
-		this.set("performance.hints", "make", options =>
-			isProductionLikeMode(options) ? "warning" : false
+		this.set(
+			"performance.hints",
+			"make",
+			options => (isProductionLikeMode(options) ? "warning" : false)
 		);
 
 		this.set("optimization", "call", value => Object.assign({}, value));
@@ -298,10 +302,10 @@ class WebpackOptionsDefaulter extends OptionsDefaulter {
 		this.set("optimization.minimizer", "make", options => [
 			{
 				apply: compiler => {
-					// Lazy load the Terser plugin
-					const TerserPlugin = require("terser-webpack-plugin");
+					// Lazy load the uglifyjs plugin
+					const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 					const SourceMapDevToolPlugin = require("./SourceMapDevToolPlugin");
-					new TerserPlugin({
+					new UglifyJsPlugin({
 						cache: true,
 						parallel: true,
 						sourceMap:

@@ -13,15 +13,13 @@ const config = require('../config') // 引入配置项
 function getEntry() {
     let entry = {}
     //读取src目录所有page入口
-    glob.sync('./src/js/**/*.js').forEach(function (name) {
+    glob.sync('./src/view/**/*.js').forEach(function (name) {
         let start = name.indexOf('src/') + 4
         let end = name.length - 3
         let eArr = []
         let n = name.slice(start, end)
         n = n.split('/')[1]
         eArr.push(name)
-        eArr.push('./src/common/js/common.js')
-        eArr.push('babel-polyfill') // 兼容es6语法插件
         entry[n] = eArr
     })
     return entry
@@ -60,8 +58,8 @@ function stamp() {
 //获取html-webpack-plugin参数的方法
 const getHtmlConfig = function (name, chunks) {
     return {
-        template: `./src/html/${name}/${name}.html`,
-        filename: `html/${name}/${name}.html`,
+        template: `./src/view/${name}/${name}.html`,
+        filename: `view/${name}/${name}.html`,
         inject: true,
         hash: false,
         chunks: chunks
@@ -76,7 +74,7 @@ module.exports = {
     entry: getEntry(),
     output: {
         path: path.resolve(__dirname, '../dist'),
-        filename: `js/[name]/[name]-${stamp()}-[hash:4]-bundle.js`,
+        filename: `view/[name]/[name]-${stamp()}-[hash:4]-bundle.js`,
         publicPath: process.env.NODE_ENV === 'production'
             ? config.build.assetsPublicPath
             : config.dev.assetsPublicPath
@@ -106,7 +104,7 @@ module.exports = {
                     options: {
                         plugins: [
                             autoprefixer({
-                                browsers: ['ie >= 8', 'Firefox >= 20', 'Safari >= 5', 'Android >= 4', 'Ios >= 6', 'last 4 version']
+                                overrideBrowserslist: ['ie >= 8', 'Firefox >= 20', 'Safari >= 5', 'Android >= 4', 'Ios >= 6', 'last 4 version']
                             })
                         ]
                     }
@@ -121,7 +119,7 @@ module.exports = {
                     options: {
                         plugins: [
                             autoprefixer({
-                                browsers: ['ie >= 8', 'Firefox >= 20', 'Safari >= 5', 'Android >= 4', 'Ios >= 6', 'last 4 version']
+                                overrideBrowserslist: ['ie >= 8', 'Firefox >= 20', 'Safari >= 5', 'Android >= 4', 'Ios >= 6', 'last 4 version']
                             })
                         ]
                     }
@@ -139,7 +137,7 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: utils.assetsPath('img/[name].[hash:7].[ext]')
+                    name: utils.assetsPath('images/[name].[hash:7].[ext]')
                 }
             },
             {
@@ -155,13 +153,13 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+                    name: utils.assetsPath('fonts/[name].[hash:7].[ext]'),
                 }
             }
         ]
     },
     resolve: {
-        extensions: ['.js', '.vue', '.json'],
+        extensions: ['.js', '.json'],
         alias: {
             '@': resolve('src'),
         }
@@ -172,13 +170,8 @@ module.exports = {
     //插件
     plugins: [
         new MiniCssExtractPlugin({
-            filename: `css/[name]/[name]-${stamp()}-[hash:4].css`
-        }),
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery",
-            jquery: "jquery",
-            "window.jQuery": "jquery"
+            filename: `view/[name]/[name]-${stamp()}-[hash:4].css`,
+            publicPath: "."
         }),
         new TransferWebpackPlugin([
             {
@@ -191,17 +184,11 @@ module.exports = {
         splitChunks: {
             cacheGroups: {
                 //打包公共模块
-                common: {
+                commons: {
                     chunks: 'initial', //initial表示提取入口文件的公共部分
                     minChunks: 2, //表示提取公共部分最少的文件数
                     minSize: 0, //表示提取公共部分最小的大小
-                    name: 'common' //提取出来的文件命名
-                },
-                babelPolyfill: {
-                    chunks: 'initial', //initial表示提取入口文件的公共部分
-                    minChunks: 2, //表示提取公共部分最少的文件数
-                    minSize: 0, //表示提取公共部分最小的大小
-                    name: 'babelPolyfill' //提取出来的文件命名
+                    name: 'commons' //提取出来的文件命名
                 }
             }
         }
@@ -215,7 +202,7 @@ Object.keys(entryObj).forEach(function (element) {
     htmlArray.push({
         _html: element,
         title: '',
-        chunks: [element, 'common']
+        chunks: [element,'commons']
     })
 })
 
