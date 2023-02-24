@@ -18,7 +18,7 @@
     "babel-loader": "8.0.4",
     "clean-webpack-plugin": "1.0.1",
     "cross-env": "^6.0.3",
-    "css-loader": "1.0.1",
+    "css-loader": "6.7.3",
     "file-loader": "1.1.6",
     "friendly-errors-webpack-plugin": "1.7.0",
     "glob": "7.1.3",
