@@ -11,7 +11,7 @@
   "author": "userzeor",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "7.1.2",
+    "@babel/core": "7.21.0",
     "@babel/plugin-transform-runtime": "7.1.0",
     "@babel/preset-env": "7.1.0",
     "autoprefixer": "9.3.1",
@@ -23,7 +23,7 @@
     "friendly-errors-webpack-plugin": "1.7.0",
     "glob": "7.1.3",
     "html-loader": "0.5.5",
-    "html-webpack-plugin": "3.2.0",
+    "html-webpack-plugin": "5.5.0",
     "mini-css-extract-plugin": "0.4.4",
     "node-notifier": "5.4.0",
     "postcss-loader": "3.0.0",
